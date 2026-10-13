@@ -15,35 +15,29 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         behavior: "smooth",
       });
     } else {
-      const element = document.getElementById(id);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop - 80,
-          behavior: "smooth",
-        });
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <footer
       className={cn(
-        "py-20 md:py-32 bg-white border-t border-gray-100",
+        "py-14 md:py-32 bg-white border-t border-gray-100",
         className
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto text-center mb-12">
+        <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
           <h3 className="text-2xl font-serif font-medium mb-4">
             Artist Name
           </h3>
           <p className="text-muted-foreground mb-6">
             Artist Title | Credentials
           </p>
-          <div className="flex justify-center space-x-6 mb-8">
+          <div className="flex justify-center gap-2 mb-6 md:mb-8">
             <a
               href="mailto:artist@example.com"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              className="p-2.5 text-gray-600 hover:text-gray-900 transition-colors"
               aria-label="Email"
             >
               <Mail className="w-6 h-6" />
@@ -52,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               href="https://instagram.com/artisthandle"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              className="p-2.5 text-gray-600 hover:text-gray-900 transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="w-6 h-6" />
@@ -61,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               href="https://facebook.com/artistpage"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              className="p-2.5 text-gray-600 hover:text-gray-900 transition-colors"
               aria-label="Facebook"
             >
               <Facebook className="w-6 h-6" />
@@ -69,8 +63,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           </div>
         </div>
 
-        <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
+        <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 text-center">
+          <div>
             <Link
               to="/"
               className="text-xl font-serif font-medium tracking-tight"
@@ -79,28 +73,28 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             </Link>
           </div>
 
-          <div className="flex space-x-6 mb-4 md:mb-0">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             <button
               onClick={() => scrollToSection("home")}
-              className="text-sm hover:text-gray-900 transition-colors"
+              className="py-2 text-sm hover:text-gray-900 transition-colors"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="text-sm hover:text-gray-900 transition-colors"
+              className="py-2 text-sm hover:text-gray-900 transition-colors"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection("gallery")}
-              className="text-sm hover:text-gray-900 transition-colors"
+              className="py-2 text-sm hover:text-gray-900 transition-colors"
             >
               Gallery
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-sm hover:text-gray-900 transition-colors"
+              className="py-2 text-sm hover:text-gray-900 transition-colors"
             >
               Contact
             </button>

@@ -21,12 +21,8 @@ const Index = () => {
         if (!targetId) return;
 
         const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80, // Account for header height
-            behavior: "smooth",
-          });
-        }
+        // scroll-padding-top in index.css keeps the section clear of the header
+        targetElement?.scrollIntoView({ behavior: "smooth" });
       });
     });
 

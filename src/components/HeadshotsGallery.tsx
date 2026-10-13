@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -14,37 +15,32 @@ interface HeadshotsGalleryProps {
 }
 
 const HeadshotsGallery: React.FC<HeadshotsGalleryProps> = ({ className }) => {
-  const [buttonVisible, setButtonVisible] = useState(true);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 1200) {
-        setButtonVisible(false);
-        return;
-      }
-      setButtonVisible(true);
-    }
-
-    window.addEventListener("resize", handleResize);
-
+    if (!api) return;
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    onSelect();
+    api.on("select", onSelect);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      api.off("select", onSelect);
     };
-  });
+  }, [api]);
 
   return (
     <section
       id="headshots"
       className={cn(
-        "relative min-h-screen flex items-center justify-center bg-gray-50 py-20",
+        "relative flex items-center justify-center bg-gray-50 py-16 md:py-20 lg:min-h-svh",
         className
       )}
     >
       <div className="w-full max-w-6xl px-4 md:px-6">
-        <h2 className="text-3xl md:text-4xl font-serif mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-serif mb-8 md:mb-12 text-center">
           Studio Photos
         </h2>
-        <Carousel className="w-full">
+        <Carousel setApi={setApi} className="w-full">
           <CarouselContent>
             {headshotsPhotos.map((item, index) => (
               <CarouselItem key={index}>
@@ -52,10 +48,12 @@ const HeadshotsGallery: React.FC<HeadshotsGalleryProps> = ({ className }) => {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-2xl shadow-lg mb-6"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="max-w-full max-h-[60svh] md:max-h-[70svh] w-auto h-auto object-contain rounded-xl md:rounded-2xl shadow-lg mb-4 md:mb-6"
                   />
                   {item.description && (
-                    <p className="text-center text-muted-foreground max-w-2xl px-4 text-lg">
+                    <p className="text-center text-muted-foreground max-w-2xl px-2 md:px-4 text-base md:text-lg">
                       {item.description}
                     </p>
                   )}
@@ -63,13 +61,13 @@ const HeadshotsGallery: React.FC<HeadshotsGalleryProps> = ({ className }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          {buttonVisible ? (
-            <>
-              <CarouselPrevious />
-              <CarouselNext />
-            </>
-          ) : null}
+          {/* Arrows sit outside the frame, so only show them where there's room; phones swipe */}
+          <CarouselPrevious className="hidden xl:inline-flex" />
+          <CarouselNext className="hidden xl:inline-flex" />
         </Carousel>
+        <p className="xl:hidden mt-4 text-center text-sm text-muted-foreground" aria-live="polite">
+          {current + 1} / {headshotsPhotos.length} · Swipe for more
+        </p>
       </div>
     </section>
   );

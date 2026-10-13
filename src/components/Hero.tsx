@@ -10,7 +10,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
   return (
     <section
       className={cn(
-        "relative min-h-screen flex items-end overflow-hidden justify-center",
+        "relative min-h-svh flex items-end overflow-hidden justify-center",
         className
       )}
     >
@@ -24,12 +24,12 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
           decoding="async"
         />
       </div>
-      <FadeIn className="w-full h-full flex flex-col items-center justify-end pb-12 px-4">
-        <div className="text-[11vw] leading-none font-medium tracking-tight transition-opacity text-white font-serif">
+      <FadeIn className="w-full h-full flex flex-col items-center justify-end pb-10 md:pb-12 px-4 text-center">
+        <div className="text-[13vw] md:text-[11vw] leading-none font-medium tracking-tight transition-opacity text-white font-serif">
           Artist Name
         </div>
-        <div className="w-full max-w-4xl h-px bg-white/40 my-6"></div>
-        <div className="text-[4vw] leading-none text-white font-serif">
+        <div className="w-full max-w-4xl h-px bg-white/40 my-4 md:my-6"></div>
+        <div className="text-xl sm:text-2xl md:text-[4vw] leading-tight md:leading-none text-white font-serif">
           Artist Title
         </div>
       </FadeIn>
