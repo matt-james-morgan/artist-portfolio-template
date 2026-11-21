@@ -49,3 +49,5 @@ Only the published copy is public. To keep the list current, edit the sheet; the
 - Gallery photos and captions: [`src/data/galleryData.ts`](src/data/galleryData.ts) (images in `public/gallery/`). Hero image: `public/lovable-uploads/hero.jpg`.
 - Email and Instagram are hard-coded in [`src/components/Contact.tsx`](src/components/Contact.tsx) and [`src/components/Footer.tsx`](src/components/Footer.tsx). Videos: [`src/components/Video.tsx`](src/components/Video.tsx).
 - Run locally with `npm install && npm run dev`. Deploy as a static site (Vercel, Netlify or Cloudflare Pages): build `npm run build`, output `dist`.
+
+**Before launch, and after every change:** run `npm run check:mobile` and look at the 360px screenshots. It must pass. See the "Phone-width check" section in the README.
